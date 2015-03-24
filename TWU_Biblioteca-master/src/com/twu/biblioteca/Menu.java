@@ -1,34 +1,40 @@
 package com.twu.biblioteca;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by maheshkk on 3/22/2015.
  */
 public class Menu {
-    Map<Integer,MenuItem> menu = new HashMap<Integer,MenuItem>();
+    List<MenuItem> menu = new ArrayList<MenuItem>();
 
-    public void addMenu(MenuItem menu) {
-        this.menu.put(menu.getId(), menu);
+    public void addMenuItem(MenuItem menu) {
+        this.menu.add(menu);
     }
 
-    @Override
-    public String toString(){
-        String stringMenu = "Select Menu:\n";
-        Set<Integer> menuItemIds = menu.keySet();
-        for(Integer itemId : menuItemIds) {
-            MenuItem menu = this.menu.get(itemId);
-            stringMenu += menu.toString() + "\n";
-        }
+    public String getPrintableMenu() {
+        String stringMenu = "Select Menu:" + System.lineSeparator();
+        stringMenu += getTextMenu();
         stringMenu += "Enter your option number here: ";
         return stringMenu;
     }
 
-    public MenuItem getMenuItem(int menuId) throws InvalidOptionException {
-        MenuItem item = menu.get(menuId);
-        if(item == null)throw new InvalidOptionException(menuId);
-        return item;
+    private String getTextMenu() {
+        String stringMenu = "";
+        for(MenuItem item: menu)
+            stringMenu += item.toString() + System.lineSeparator();
+        return stringMenu;
+    }
+
+    private MenuItem getMenuItemOf(int menuItemId) throws InvalidOptionException {
+        for (MenuItem item: menu){
+            if(item.isYourId(menuItemId)) return item;
+        }
+        throw new InvalidOptionException(menuItemId);
+
+    }
+
+    public void performActionOfItem(int menuItemId) throws InvalidOptionException, QuitAppException {
+        getMenuItemOf(menuItemId).performAction();
     }
 }

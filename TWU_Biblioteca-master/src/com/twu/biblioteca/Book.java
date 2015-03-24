@@ -14,14 +14,6 @@ public class Book {
     }
 
     @Override
-    public String toString() {
-        String book = "\t\tName:\t" + name + "\n";
-        book += "\t\tAuthor:\t" + author + "\n";
-        book += "\t\tPublished Year:\t" + publishedYear + "\n";
-        return book;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -39,5 +31,12 @@ public class Book {
         int result = name.hashCode();
         result = 31 * result + author.hashCode();
         return result;
+    }
+
+    public String getBookDetailsAsText() {
+        String book = "\t\tName:\t" + name + System.lineSeparator();
+        book += "\t\tAuthor:\t" + author + System.lineSeparator();
+        book += "\t\tPublished Year:\t" + publishedYear + System.lineSeparator();
+        return book;
     }
 }

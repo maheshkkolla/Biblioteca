@@ -4,9 +4,9 @@ package com.twu.biblioteca;
  * Created by maheshkk on 3/21/2015.
  */
 public class MenuItem {
-    int id;
-    String item;
-    Command action;
+    private int id;
+    private String item;
+    private Command action;
 
     public MenuItem(int id, String item, Command action) {
         this.id = id;
@@ -25,5 +25,9 @@ public class MenuItem {
 
     public void performAction() throws QuitAppException {
         action.execute();
+    }
+
+    public boolean isYourId(int id) {
+        return(this.id == id);
     }
 }

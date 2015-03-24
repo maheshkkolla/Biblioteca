@@ -3,16 +3,16 @@ package com.twu.biblioteca;
 /**
  * Created by maheshkk on 3/22/2015.
  */
-public class ActionForMenuItem {
+public class ActionsForMenuItems {
 
     private Library library;
 
-    public ActionForMenuItem(Library library) {
+    public ActionsForMenuItems(Library library) {
         this.library = library;
     }
-    public Object getActionForListbooks() {
+    public Object getActionForListBooks() {
         return new Command(){
-            public Library library;
+            private Library library;
             public Object init(Library library) {
                 this.library = library;
                 return this;
